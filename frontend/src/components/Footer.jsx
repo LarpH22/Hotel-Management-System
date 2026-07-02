@@ -24,14 +24,14 @@ export default function Footer() {
         <h3>Stay Updated</h3>
         <p>Subscribe to get the latest updates and announcements.</p>
         <div className="newsletter-input">
-          <input type="email" placeholder="Enter your email" />
-          <button type="button">→</button>
+          <input type="email" placeholder="Enter your email" aria-label="Email for newsletter" />
+          <button type="button" onClick={() => alert('Thanks! Newsletter sign-up is simulated in this demo.')}>→</button>
         </div>
         <div className="social-row">
-          <span>F</span>
-          <span>T</span>
-          <span>L</span>
-          <span>Y</span>
+          <button type="button" aria-label="Facebook">F</button>
+          <button type="button" aria-label="Twitter">T</button>
+          <button type="button" aria-label="LinkedIn">L</button>
+          <button type="button" aria-label="YouTube">Y</button>
         </div>
       </div>
     </footer>

@@ -51,8 +51,20 @@ export default function HomePage() {
               Streamline invoicing, track payments, and manage receivables with accuracy and ease. Built exclusively for the hospitality industry.
             </p>
             <div className="hero-actions">
-              <a className="hero-button hero-button-primary" href="#features">Explore Features <span>→</span></a>
-              <a className="hero-button hero-button-secondary" href="#contact">Request Demo <span>▢</span></a>
+              <button
+                type="button"
+                className="hero-button hero-button-primary"
+                onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Explore Features <span>→</span>
+              </button>
+              <button
+                type="button"
+                className="hero-button hero-button-secondary"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                Request Demo <span>▢</span>
+              </button>
             </div>
           </section>
           <aside className="hero-panel" aria-label="Billing metrics">

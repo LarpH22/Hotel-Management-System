@@ -4,20 +4,38 @@ import axios from 'axios';
 import { setToken } from '../utils/auth';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('test@hotel.com');
+  const [password, setPassword] = useState('password');
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('Use the demo account to explore the system.');
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setError('');
+    setMessage('Signing you in...');
+
     try {
       const response = await axios.post('/api/auth/login', { email, password });
       setToken(response.data.token);
+      setMessage('Welcome back. Redirecting to the dashboard...');
       navigate('/dashboard');
     } catch (err) {
-      setError('Invalid credentials');
+      setError('Invalid credentials. Try test@hotel.com with password "password".');
+      setMessage('');
     }
+  };
+
+  const handleForgotPassword = () => {
+    setError('');
+    setMessage('Use the demo credentials: test@hotel.com / password.');
+  };
+
+  const handleRegister = () => {
+    setEmail('test@hotel.com');
+    setPassword('password');
+    setError('');
+    setMessage('Demo access is ready. Sign in with the test account above.');
   };
 
   return (
@@ -64,7 +82,7 @@ export default function LoginPage() {
 
           <div className="form-field password-field">
             <label htmlFor="password">Password</label>
-            <button type="button" className="forgot-password">Forgot Password?</button>
+            <button type="button" className="forgot-password" onClick={handleForgotPassword}>Forgot Password?</button>
             <div className="field-shell">
               <span className="field-icon">🔒</span>
               <input
@@ -83,12 +101,13 @@ export default function LoginPage() {
             <span>Remember Me</span>
           </label>
 
+          {message && <div className="login-status">{message}</div>}
           {error && <div className="login-error">{error}</div>}
           <button type="submit" className="login-submit">Sign In</button>
 
           <div className="login-register">
             <div className="login-divider"><span /></div>
-            <p>Don&rsquo;t have an account? <button type="button">REGISTER</button></p>
+            <p>Don&rsquo;t have an account? <button type="button" onClick={handleRegister}>REGISTER</button></p>
           </div>
         </form>
       </section>
